@@ -1,5 +1,6 @@
 ﻿import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
@@ -52,5 +53,61 @@ public class Main {
         champions.put(2022, "Colorado Avalanche");
         champions.put(2023, "Vegas Golden Knights");
         champions.put(2024, "Florida Panthers");
+
+        // CREATE SCANNER FOR USER INPUT
+        Scanner scanner = new Scanner(System.in);
+
+        // PRINT PROGRAM TITLE
+        System.out.println("\n===================================");
+        System.out.println("  Stanley Cup Champions 1980-2024  ");
+        System.out.println("===================================");
+
+        // ENTER MAIN LOOP FOR USER INPUT AND DISPLAY
+        while (true) {
+            System.out.println(
+                    "Enter a year to show the Stanley Cup champion from the years 1980-2024:");
+
+            // CAPTURE USER INPUT AND TRY TO PARSE IT AS AN INTEGER
+            String userInput = scanner.nextLine();
+
+            try {
+                int yearInput = Integer.parseInt(userInput);
+
+                System.out.println();
+
+                // DISPLAY CHAMPION FOR ENTERED YEAR IF FOUND
+                if (champions.containsKey(yearInput)) {
+                    System.out.println("Stanley Cup Champions " + yearInput + ": " + champions.get(yearInput));
+                } else {
+                    System.out.println("No champion found for that year.");
+                }
+            } catch (NumberFormatException e) {
+                // HANDLE CASE IF THE USER DOES NOT ENTER A VALID YEAR
+                System.out.println("Invalid input. Please enter a valid year.");
+                // Skip the rest of the logic and continue asking for a valid year
+                continue;
+            }
+
+            // ASK USER IF THEY WANT TO RUN THE PROGRAM AGAIN OR EXIT
+            System.out.println("\nPress Enter to run the program again or press 'q' and then Enter to exit.");
+            String continueInput = scanner.nextLine();
+
+            // If 'q' is pressed, exit the program
+            if (continueInput.equalsIgnoreCase("q")) {
+                break; // Exit the program immediately
+            } else if (continueInput.isEmpty()) {
+                // If Enter is pressed, continue the program immediately
+                continue;
+            } else {
+                // Invalid input case when it's neither 'q' nor empty (Enter)
+                System.out.println("Invalid input. Please press Enter to continue or 'q' and then Enter to exit.");
+            }
+        }
+
+        // CLOSE SCANNER AND PRINT EXIT MESSAGE
+        scanner.close();
+        System.out.println();
+        System.out.println("Exiting program");
+        System.out.println();
     }
 }
